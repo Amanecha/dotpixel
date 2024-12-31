@@ -1,66 +1,62 @@
-# Conversion to pixel
-# Project Name
+# Conversion to Pixel
 
-## Overview
-This project is a web application that converts images that users drag and drop into pixel images.
+## Project Plan
 
-## Features
-- **Image Upload**: Drag-and-drop functionality for easy image upload.
-- **Converted Image Save**: Users can save the converted images after processing.
-- **User Authentication**: Registration and login functionality to ensure only authorized users can save images.
-- **Usage Limits**: Users are limited to 30 conversions per hour.
-- **Infrastructure**: Hosted on Azure App Service, images are stored in Azure Blob Storage, and user/converted image data is managed in Azure SQL Database.
+### Overview
+This project aims to develop a web application that allows users to convert images into pixel art through a drag-and-drop interface. The project is currently in the planning and development phase.
 
-## System Architecture
+### Goals
+- **Image Upload Functionality**: Implement a drag-and-drop interface for users to upload images.
+- **Image Conversion and Save**: Provide a feature for users to convert images and save the processed results.
+- **User Authentication**: Enable user registration and login functionality to restrict certain features, such as image saving, to authorized users only.
+- **Usage Limits**: Introduce a feature to limit users to 30 conversions per hour.
+- **Infrastructure Setup**: Use Azure services for hosting, storage, and database management.
+
+## Planned System Architecture
 
 ### Architecture Overview
 
 - **Frontend**:  
-  Provides a drag-and-drop UI for image upload and conversion. The frontend is built with modern JavaScript frameworks (React or Vue.js) and hosted on Azure App Service.
+  - Build a user interface for image upload and conversion.  
+  - Use modern JavaScript frameworks like **React** or **Vue.js**.  
+  - Host the frontend on **Azure App Service**.
 
 - **Backend**:  
-  The backend is powered by **Node.js**, which handles the logic for processing image conversion requests. The backend is responsible for invoking a **Python service** to perform image transformations (such as pixelating and adding grid lines). The Node.js backend also manages user authentication, image upload, and metadata handling.
+  - Develop an API using **Node.js** and **Express.js** for image processing and user authentication.  
+  - Integrate with a **Python service** for performing image transformations (e.g., pixelation and grid-line addition).  
+  - Host the backend on **Azure App Service**.
 
 - **Python Service**:  
-  A **Python service** is used for image transformation. The backend communicates with this service to perform pixelation and grid-line addition using Python libraries such as **Pillow**. The service is hosted on Azure App Service or as a containerized application in Azure.
+  - Create a Python-based service to handle image transformation using libraries like **Pillow**.  
+  - Plan to deploy the service as part of the backend or as a standalone containerized application on Azure.
 
 - **Database**:  
-  User data and metadata for converted images are stored in **Azure SQL Database**. This includes user accounts, image conversion counts, and references to the converted image files.
+  - Use **Azure SQL Database** to store user data, conversion metadata, and usage logs.
 
 - **Storage**:  
-  Converted images are stored in **Azure Blob Storage**. After the image transformation is completed by the Python service, the backend stores the resulting image in Blob Storage and returns a URL or path to the client.
+  - Save processed images in **Azure Blob Storage** for scalable and secure storage.  
+  - Return URLs of the stored images to users after processing.
 
-- **Hosting**:  
-  Both the frontend and backend are hosted on **Azure App Service**. The backend is built with **Node.js** using **Express.js** to handle API requests, including image upload, transformation requests, and metadata storage.
+- **Hosting and Monitoring**:  
+  - Use **Azure App Insights** to monitor application performance, track errors, and gather usage analytics.
 
-- **Logging and Monitoring**:  
-  **Azure App Insights** is used to monitor backend performance, track errors, and provide insights into application usage, including user behavior and system resource consumption.
+## Development Features
 
-### User Authentication
-- Implement account registration and login functionality.
-- Only registered users can access the image save feature.
+- **User Authentication**:  
+  - Implement account registration and login.  
+  - Restrict the ability to save converted images to authenticated users.
 
-### Specifications
-#### Frontend
-- Drag-and-drop image upload functionality.
-- After upload, users can click a convert button to process the image.
-- Display a preview of the converted image, and allow users to save it.
+- **Image Upload and Conversion**:  
+  - Create a drag-and-drop interface for uploading images.  
+  - Add functionality to display and save converted images.
 
-#### Backend
-- Provide an API for image conversion.
-- Save converted images to Azure Blob Storage.
-- Enforce conversion limits based on user authentication.
+- **Usage Limits**:  
+  - Implement backend logic to restrict image conversions to 30 per user per hour.  
+  - Notify users when they reach the limit.
 
-#### Database
-- Store user data (username, email, hashed password) in Azure SQL Database.
-- Store metadata for converted images (URL, conversion time) in the database.
+## Infrastructure Goals
 
-#### Usage Limits
-- Users can convert images up to **30 times per hour**.
-- If the limit is exceeded, an error message will be displayed.
-
-## Infrastructure
-- **Azure App Service** for hosting both frontend and backend.
-- **Azure Blob Storage** for storing converted images.
-- **Azure SQL Database** for managing user and image data.
-- **Azure App Insights** for error tracking and monitoring resource usage.
+- **Azure App Service**: Host the frontend, backend, and Python service.
+- **Azure Blob Storage**: Store converted images securely.
+- **Azure SQL Database**: Manage user accounts and conversion metadata.
+- **Azure App Insights**: Monitor application performance and gather analytics.
