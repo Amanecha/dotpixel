@@ -1,6 +1,7 @@
 # Conversion to Pixel
 
 ## Project Plan
+### Project status working in process
 
 ### Overview
 This project aims to develop a web application that allows users to convert images into pixel art through a drag-and-drop interface. The project is currently in the planning and development phase.
