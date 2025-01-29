@@ -5,3 +5,4 @@ __pycache__/
 output_pixel_art_with_grid.png
 output_pixel_art.png
 !.venv/*
+*uploads
