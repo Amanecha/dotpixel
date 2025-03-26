@@ -7,6 +7,7 @@ const App = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    console.log(e) 
   };
 
   const handleUpload = async () => {
