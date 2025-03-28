@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - dot-app-acb6de1bcb7be153
 on:
   push:
     branches:
-      - main
+      - release_test_amane
   workflow_dispatch:
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Test'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write # JWT のリクエストに必要
