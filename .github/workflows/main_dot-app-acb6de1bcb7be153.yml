@@ -22,12 +22,12 @@ jobs:
 
       - name: Install dependencies, build, and test
         run: |
-          cd ./dotapp/frontend
+          cd frontend
           echo ${pwd}
           npm install
           npm run build --if-present
           npm run test --if-present
-        working-directory: ./dotapp/frontend # working-directory を指定する方法もOK
+        working-directory: frontend # working-directory を指定する方法もOK
 
       - name: Zip artifact for deployment
         run: zip -r release.zip frontend/build # build フォルダのみ圧縮
