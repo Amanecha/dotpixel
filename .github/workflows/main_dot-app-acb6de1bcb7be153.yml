@@ -21,6 +21,7 @@ jobs:
           node-version: '22.x'
 
       - name: Install dependencies, build, and test
+        working-directory: ./dotpixel/frontend 
         run: |
           cd frontend
           echo ${pwd}
