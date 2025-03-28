@@ -23,6 +23,7 @@ jobs:
       - name: Install dependencies, build, and test
         run: |
           cd frontend  # frontend ディレクトリに移動
+          echo ${pwd}
           npm install
           npm run build --if-present
           npm run test --if-present
