@@ -66,5 +66,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'dot-app-acb6de1bcb7be153'
-          slot-name: 'Production'
           package: frontend/build # build フォルダのみデプロイ
