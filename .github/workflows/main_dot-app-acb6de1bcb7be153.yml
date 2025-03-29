@@ -53,6 +53,16 @@ jobs:
         with:
           name: node-app
 
+      # 2. Debug: List web apps to check if the resource is visible from the runner
+      - name: Check if Azure Web App exists
+        run: |
+          az webapp list --query "[?name=='dot-app-acb6de1bcb7be153'].{Name:name, ResourceGroup:resourceGroup}" --output table
+
+      # 3. Debug: Show detailed info for the specific web app to ensure it's accessible
+      - name: Check specific Azure Web App details
+        run: |
+          az webapp show --name dot-app-acb6de1bcb7be153 --resource-group example-resources --debug
+
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
