@@ -79,4 +79,4 @@ jobs:
           app-name: 'dot-app-acb6de1bcb7be153'
           resource-group-name: 'example-resources'
           slot-name: ''
-          package: frontend/
+          package: frontend/build 
