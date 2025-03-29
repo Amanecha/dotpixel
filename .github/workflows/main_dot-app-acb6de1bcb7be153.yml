@@ -53,6 +53,14 @@ jobs:
         with:
           name: node-app
 
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+
       # 2. Debug: List web apps to check if the resource is visible from the runner
       - name: Check if Azure Web App exists
         run: |
@@ -62,14 +70,6 @@ jobs:
       - name: Check specific Azure Web App details
         run: |
           az webapp show --name dot-app-acb6de1bcb7be153 --resource-group example-resources --debug
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
