@@ -66,7 +66,7 @@ jobs:
       - name: Load environment variables
         run: |
           if [ -f .env ]; then
-            echo "APP_SERVICE_NAME=$(grep 'APP_SERVICE_NAME' .env | cut -d '=' -f2)" >> $GITHUB_ENV
+            echo "app_service_name=$(grep 'app_service_name' .env | cut -d '=' -f2)" >> $GITHUB_ENV
           fi
 
       - name: 'Deploy to Azure Web App'
