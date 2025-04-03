@@ -73,7 +73,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.APP_SERVICE_NAME }}
+          app-name: ${{ env.app_service_name }}
           resource-group-name: 'example-resources'
           slot-name: ''
           package: frontend/build 
