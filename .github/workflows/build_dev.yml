@@ -70,7 +70,7 @@ jobs:
           fi
           
       - name: Check if app-service-name is loaded
-        run: echo $APP_SERVICE_NAME
+        run: echo $app_service_name
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
