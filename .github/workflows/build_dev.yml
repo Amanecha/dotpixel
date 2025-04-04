@@ -69,6 +69,15 @@ jobs:
             echo "app_service_name=$(grep 'app_service_name' .env | cut -d '=' -f2)" >> $GITHUB_ENV
           fi
           
+      - name: Debug .env content
+        run: cat .env
+
+      - name: Load environment variables
+        run: |
+          if [ -f .env ]; then
+            echo "app_service_name=$(grep '^app_service_name=' .env | cut -d '=' -f2)" >> $GITHUB_ENV
+          fi
+
       - name: Check if app-service-name is loaded
         run: echo $app_service_name
 
