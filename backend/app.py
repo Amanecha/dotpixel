@@ -29,6 +29,10 @@ def convert_to_pixel_art_with_grid(image_path, output_path, pixel_size=10, grid_
 
     image.save(output_path)
 
+@app.route('/')
+def home():
+    return "Welcome to the Flask app!"
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
