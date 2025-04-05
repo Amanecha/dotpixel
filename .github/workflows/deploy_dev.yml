@@ -15,7 +15,6 @@ jobs:
     permissions:
       id-token: write # JWT のリクエストに必要
       contents: read # actions/checkout に必要
-      
 
     steps:
       - name: Download artifact from build
