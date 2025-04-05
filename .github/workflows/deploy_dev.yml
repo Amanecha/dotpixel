@@ -1,7 +1,10 @@
 name: Deploy to Azure
 
 on:
-  workflow_dispatch: # 手動 or 別workflowからトリガー
+  workflow_run:
+    workflows: ["Build Node.js app"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -15,15 +18,17 @@ jobs:
       
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+      - name: Download artifact from build
+        uses: dawidd6/action-download-artifact@v3
         with:
+          workflow: build_dev.yml
+          workflow_conclusion: success
           name: node-app
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      - name: List files after unzip
-        run: ls -la frontend/build
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
