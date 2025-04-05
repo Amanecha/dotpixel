@@ -10,3 +10,9 @@ module "app_service" {
 module "container_registry" {
   source = "./resources/container_registory"
 }
+
+module "container_instances" {
+  source = "./resources/container_instances"
+  acr_username = var.acr_username
+  acr_password = var.acr_password
+}
