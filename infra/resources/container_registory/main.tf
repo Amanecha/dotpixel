@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_container_registry" "example" {
-  name                = "exampleacr${random_string.unique.result}"
+  name                = var.acr_username
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   sku                  = "Basic"
