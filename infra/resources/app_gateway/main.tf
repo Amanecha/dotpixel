@@ -1,34 +1,9 @@
-# Resource Group
+
 resource "azurerm_resource_group" "app_gateway_rg" {
   name     = "app_gateway_rg"
   location = "japaneast"
 }
 
-# Virtual Network
-resource "azurerm_virtual_network" "main" {
-  name                = "example-vnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = var.location
-  resource_group_name = azurerm_resource_group.app_gateway_rg.name
-}
-
-# Subnet for App Gateway
-resource "azurerm_subnet" "appgw" {
-  name                 = "subnet-appgw"
-  resource_group_name  = azurerm_resource_group.app_gateway_rg.name
-  virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.1.0/24"]
-}
-
-# Subnet for ACI (no changes needed here)
-resource "azurerm_subnet" "aci" {
-  name                 = "subnet-aci"
-  resource_group_name  = azurerm_resource_group.app_gateway_rg.name
-  virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.2.0/24"]
-}
-
-# Static Public IP for App Gateway
 resource "azurerm_public_ip" "appgw" {
   name                = "example-appgw-pip"
   location            = var.location
@@ -49,7 +24,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   gateway_ip_configuration {
     name      = "gateway-ip-config"
-    subnet_id = azurerm_subnet.appgw.id
+    subnet_id = var.subnet_id
   }
 
   frontend_port {
@@ -64,7 +39,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   backend_address_pool {
     name = "aci-backend-pool"
-    fqdns = [ "dot-pixel-api-app.japaneast.azurecontainer.io" ]
+    fqdns = [ "${var.appgw_dns_name}.japaneast.azurecontainer.io" ]
   }
 
   backend_http_settings {
@@ -92,6 +67,3 @@ resource "azurerm_application_gateway" "appgw" {
   }
 }
 
-output "aci_subnet_id" {
-  value = azurerm_subnet.aci.id
-}

@@ -1,14 +1,10 @@
-module "app_gateway" {
-  source              = "../app_gateway"
-}
-
 resource "azurerm_container_group" "example" {
   name                = "example-container-group"
   location            = "japaneast"
   resource_group_name = "acr-example-resources"
   os_type             = "Linux"
   ip_address_type     = "Public"
-  dns_name_label      = "dot-pixel-api-app"
+  dns_name_label      = var.appgw_dns_name
   network_profile_id = azurerm_network_profile.aci_profile.id
 
   container {
@@ -42,7 +38,7 @@ resource "azurerm_network_profile" "aci_profile" {
     name = "aci-nic"
     ip_configuration {
       name      = "aci-ipconfig"
-      subnet_id = module.app_gateway.aci_subnet_id
+      subnet_id = var.subnet_id
     }
   }
 }

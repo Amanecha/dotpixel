@@ -23,3 +23,8 @@ variable "acr_username" {
   description = "ACR admin username"
   type        = string
 }
+
+variable "appgw_dns_name" {
+  description = "application gateway backend pool"
+  type        = string
+}
