@@ -4,4 +4,7 @@
 ### docker run --rm -it -v $(pwd):/workspace -w /workspace run-terraform bash
 ### terraform login
 ### terraform init
-- you can use aztfexport
+
+
+### cd dotapp/infra
+### ./deploy.sh
