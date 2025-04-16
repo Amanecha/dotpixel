@@ -5,6 +5,7 @@
 ### terraform login
 ### terraform init
 
-
 ### cd dotapp/infra
 ### ./deploy.sh
+
+### ./destroy.sh

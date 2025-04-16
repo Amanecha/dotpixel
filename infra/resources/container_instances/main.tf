@@ -9,7 +9,7 @@ resource "azurerm_container_group" "example" {
 
   container {
     name   = "flask-pixel-app"
-    image  = "${var.acr_username}.azurecr.io/flask-pixel-app:0406_1"
+    image  = "${var.acr_username}.azurecr.io/flask-pixel-app:latest"
     cpu    = "1"
     memory = "1.5"
     ports {
