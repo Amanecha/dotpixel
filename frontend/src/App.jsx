@@ -19,7 +19,7 @@ const App = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData);
+      const response = await axios.post('/upload', formData);
       setMessage(`Conversion successful! Check: ${response.data.output_path}`);
     } catch (error) {
       setMessage("Error during upload or processing.");
