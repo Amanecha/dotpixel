@@ -48,6 +48,8 @@ resource "azurerm_application_gateway" "appgw" {
     protocol              = "Http"
     cookie_based_affinity = "Disabled"
     request_timeout       = 60
+    request_body_buffering = true
+    max_request_body_size   = 32
   }
 
   http_listener {
