@@ -13,8 +13,8 @@ jobs:
       name: 'Test'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # JWT のリクエストに必要
-      contents: read # actions/checkout に必要
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build
