@@ -10,6 +10,7 @@ resource "azurerm_public_ip" "appgw" {
   resource_group_name = azurerm_resource_group.app_gateway_rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label = "dotapp-front-domain"
 }
 
 resource "azurerm_application_gateway" "appgw" {

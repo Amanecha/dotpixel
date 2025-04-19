@@ -19,7 +19,7 @@ const App = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('/upload', formData);
+      const response = await axios.post('http://dotapp-front-domain.japaneast.cloudapp.azure.com/upload', formData);
       setMessage(`Conversion successful! Check: ${response.data.output_path}`);
     } catch (error) {
       setMessage("Error during upload or processing.");
