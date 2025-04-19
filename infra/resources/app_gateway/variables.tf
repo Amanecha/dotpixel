@@ -33,3 +33,7 @@ variable "vnet_name" {
   description = "name of the virtual network"
   type        = string
 }
+
+variable "log_analytics_workspace_id" {
+  type =string
+}

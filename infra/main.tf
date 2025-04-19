@@ -20,6 +20,7 @@ module "app_gateway" {
   subnet_appgw_id = module.networking.subnet_appgw_id 
   subnet_aci_id = module.networking.subnet_aci_id
   vnet_name = module.networking.vnet_name
+  log_analytics_workspace_id = module.loganalytics_workspace.log_analytics_workspace_id
 }
 
 
@@ -36,4 +37,9 @@ module "container_instances" {
   appgw_dns_name = var.appgw_dns_name
   resource_group_name = module.app_service.resource_group_name
   vnet_id             = module.networking.vnet_id
+}
+
+module "loganalytics_workspace" {
+  source = "./resources/loganalytics_workspace"
+  resource_group_name = module.app_gateway.resource_group_name
 }

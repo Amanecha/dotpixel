@@ -10,6 +10,7 @@ resource "azurerm_public_ip" "appgw" {
   resource_group_name = azurerm_resource_group.app_gateway_rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label = "dotapp-front-domain"
 }
 
 resource "azurerm_application_gateway" "appgw" {
@@ -48,9 +49,8 @@ resource "azurerm_application_gateway" "appgw" {
     protocol              = "Http"
     cookie_based_affinity = "Disabled"
     request_timeout       = 60
-    request_body_buffering = true
-    max_request_body_size   = 32
   }
+
 
   http_listener {
     name                           = "appGwHttpListener"
@@ -69,3 +69,26 @@ resource "azurerm_application_gateway" "appgw" {
   }
 }
 
+resource "azurerm_monitor_diagnostic_setting" "appgw_diag" {
+  name               = "appgw-diagnostics"
+  target_resource_id = azurerm_application_gateway.appgw.id
+
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  enabled_log {
+    category = "ApplicationGatewayAccessLog"
+  }
+
+  enabled_log {
+    category = "ApplicationGatewayPerformanceLog"
+  }
+
+  enabled_log {
+    category = "ApplicationGatewayFirewallLog"
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+  }
+}
