@@ -1,3 +1,7 @@
+data "azurerm_key_vault_certificate" "appgw_cert" {
+  name         = var.cert_name
+  key_vault_id = var.key_vault_id
+}
 
 resource "azurerm_resource_group" "app_gateway_rg" {
   name     = "app_gateway_rg"
@@ -29,8 +33,8 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   frontend_port {
-    name = "frontendPort"
-    port = 5000
+  name = "https-port"
+  port = 443
   }
 
   frontend_ip_configuration {
@@ -44,30 +48,37 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   backend_http_settings {
-    name                  = "httpSettings"
+    name                  = "httpsettings"
     port                  = 5000
     protocol              = "Http"
     cookie_based_affinity = "Disabled"
     request_timeout       = 60
   }
 
+  ssl_certificate {
+    name     = "appgw-cert"
+    data     = var.ssl_cert_data
+    password = var.cert_password
+  }
 
   http_listener {
-    name                           = "appGwHttpListener"
+    name                           = "appGwHttpsListener"
     frontend_ip_configuration_name = "appGwFrontendIP"
-    frontend_port_name             = "frontendPort"
-    protocol                       = "Http"
+    frontend_port_name             = "https-port"
+    protocol                       = "Https"
+    ssl_certificate_name           = "appgw-cert"
   }
 
   request_routing_rule {
-    name                       = "rule1"
+    name                       = "https-rule"
     rule_type                  = "Basic"
-    http_listener_name         = "appGwHttpListener"
+    http_listener_name         = "appGwHttpsListener"
     backend_address_pool_name  = "aci-backend-pool"
-    backend_http_settings_name = "httpSettings"
+    backend_http_settings_name = "httpsettings"
     priority                   = 1 
   }
 }
+
 
 resource "azurerm_monitor_diagnostic_setting" "appgw_diag" {
   name               = "appgw-diagnostics"

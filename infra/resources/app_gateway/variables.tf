@@ -37,3 +37,20 @@ variable "vnet_name" {
 variable "log_analytics_workspace_id" {
   type =string
 }
+
+variable "cert_name" {
+  description = "cert name in Key Vault"
+  type        = string
+}
+
+variable "cert_password" {
+  description = "PFX import password"
+  type        = string
+  sensitive   = true
+}
+
+variable "key_vault_id" {
+  type = string
+}
+
+variable "ssl_cert_data" {}
