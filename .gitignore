@@ -10,3 +10,7 @@ output_pixel_art.png
 release.zip
 dist/
 build/
+*.crt
+*.key
+*.pfx
+*.task

@@ -28,3 +28,21 @@ variable "appgw_dns_name" {
   description = "application gateway backend pool"
   type        = string
 }
+
+variable "keyvault_name" {
+  type        = string
+}
+
+variable "cert_name" {
+  default = "appgw-cert"
+}
+
+variable "cert_password" {
+  description = "Password for the .pfx certificate"
+  type        = string
+}
+
+variable "ssl_cert_data" {
+  description = "SSL certificate data"
+  type        = string
+}
